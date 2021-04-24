@@ -1,1 +1,1 @@
-web: python manage.py migrate && gunicorn jukes.wsgi
+web: python manage.py migrate && gunicorn Jukes.wsgi

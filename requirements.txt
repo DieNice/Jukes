@@ -6,5 +6,6 @@ django-heroku
 djangorestframework==3.12.4
 drf-extensions==0.7.0
 pytz==2021.1
+gunicorn
 sqlparse==0.4.1
 whitenoise==5.2.0
