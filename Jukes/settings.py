@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+try:
+    import django_heroku
+except:
+    django_heroku = None
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -46,10 +50,13 @@ REST_FRAMEWORK = {
     # 'DEFAULT_RENDERER_CLASSES': [
     #     'rest_framework.renderers.JSONRenderer',
     # ],
-    # 'DEFAULT_PARSER_CLASSES': [
+    # 'DEFAULT_wPARSER_CLASSES': [
     #     'rest_framework.parsers.JSONParser',
     # ]
 }
+
+if django_heroku:
+    django_heroku.settings(locals())
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
