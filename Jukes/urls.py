@@ -17,14 +17,23 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 from rest_framework import routers
-import rest_framework
+from rest_framework_extensions.routers import ExtendedDefaultRouter
 from juke import views
+from juke.router import SwitchDetailRouter
 
-router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
+router = ExtendedDefaultRouter()
+switchRowter = SwitchDetailRouter()
+
+user_route = router.register(r'users', views.UserViewSet)
+user_route.register(r'tweets', views.UserTweetViewSet, 'user-tweets', ['username'])
+user_route.register(r'follows', views.UserFolowsViewSet, 'user-follows', ['username'])
+user_route.register(r'followed', views.UserFollowedViewSet, 'user-followed', ['username'])
 router.register(r'tweets', views.TweetViewSet)
+router.register(r'feed', views.FeedViewSet)
+switchRowter.register(r'follow', views.FollowUserViewSet)
 
 urlpatterns = [
+    path('v1/', include(switchRowter.urls)),
     path('v1/', include(router.urls)),
     path('/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),

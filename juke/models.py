@@ -12,3 +12,10 @@ class Tweet(models.Model):
 
     def __str__(self):
         return f'[{self.author.username}]{self.text}'
+
+
+class Follower(models.Model):
+    follower = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='follows')
+    follows = models.ForeignKey('auth.User', on_delete=models.CASCADE,
+                                related_name='followers')
+    followed = models.DateTimeField(auto_now_add=True)
