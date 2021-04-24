@@ -55,8 +55,6 @@ REST_FRAMEWORK = {
     # ]
 }
 
-if django_heroku:
-    django_heroku.settings(locals())
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -142,3 +140,6 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+if django_heroku:
+    django_heroku.settings(locals())
